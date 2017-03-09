@@ -45,7 +45,8 @@ SPACE   = [\ \r\t\f\t]
 ENTER   = [\ \n]
 
 %%
-
+<YYINITIAL> {PAR_IZQ}       { return new Symbol(sym.PAR_IZQ, yyline, yycolumn, yytext()); }
+<YYINITIAL> {PAR_DER}       { return new Symbol(sym.PAR_DER, yyline, yycolumn, yytext()); }
 <YYINITIAL> {ID}            { return new Symbol(sym.ID, yyline, yycolumn, yytext()); }
 <YYINITIAL> {ENTERO}        { return new Symbol(sym.ENTERO, yyline, yycolumn, yytext()); }
 <YYINITIAL> {DECIMAL}       { return new Symbol(sym.DECIMAL, yyline, yycolumn, yytext()); }
