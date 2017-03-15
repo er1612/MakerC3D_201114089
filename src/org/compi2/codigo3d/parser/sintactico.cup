@@ -26,7 +26,7 @@ terminal String ID, ENTERO, DECIMAL;
 terminal TokenC3D MAS, MENOS, MULT, DIV, POT, PAR_IZQ, PAR_DER;
 terminal TokenC3D MENORQUE, MAYORQUE, MENORIGUAL, MAYORIGUAL, IGUAL, DIFERENTE, AND, NOT, OR;
 nonterminal NodoC3D inicial, expresion;
-//Se determina la precedencia y asociatividad.
+
 precedence	left		OR;
 precedence	left		AND;
 precedence	left		NOT;
