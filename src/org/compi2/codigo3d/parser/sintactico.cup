@@ -43,21 +43,21 @@ inicial     ::= {: ControlC3D.reiniciar(); :} explogica:exp
                         ControlC3D.agregarC3D("//Último valor: " + exp.getCad());
                     :};
 					
-explogica		::= exprel:izq AND exprel:der
+explogica		::= explogica:izq AND explogica:der
 					{: 
                         String temp = ControlC3D.generaTemp();
                         String c3d = temp + " = " + izq.getCad() + " && " + der.getCad() + ";\n";
                         ControlC3D.agregarC3D(c3d);
                         RESULT = new NodoC3D(temp); 
                     :}
-				|exprel:izq OR exprel:der
+				|explogica:izq OR explogica:der
 					{: 
                         String temp = ControlC3D.generaTemp();
                         String c3d = temp + " = " + izq.getCad() + " || " + der.getCad() + ";\n";
                         ControlC3D.agregarC3D(c3d);
                         RESULT = new NodoC3D(temp); 
                     :}
-				|NOT exprel:der
+				|NOT explogica:der
 					{: 
                         String temp = ControlC3D.generaTemp();
                         String c3d = temp + " = " + " ! " + der.getCad() + ";\n";
