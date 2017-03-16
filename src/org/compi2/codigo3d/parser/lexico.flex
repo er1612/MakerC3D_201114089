@@ -25,17 +25,15 @@ DIV             = "/"
 POT             = "^"
 PAR_IZQ         = "("
 PAR_DER         = ")"
-
-MAYORQ	=	">"
-MENORQ	=	"<"
-MAYORI	=	">="
-MENORI	=	"<="
-IGUALQ	=	"=="
-DIFERE	=	"!="
-
-ANDLOG	=	"&&"
-ORLOG	=	"||"
-NOTLOG	=	"!"
+MAYOR=">"
+MENOR="<"
+MAYORIGUAL=">="
+MENORIGUAL="<="
+IGUALIGUAL="=="
+DIFERENTE="!="
+AND="&&"
+OR="||"
+NOT="!"
 
 ID              = [A-Za-z][_0-9A-Za-z]*
 ENTERO          = [0-9]+
@@ -45,27 +43,26 @@ SPACE   = [\ \r\t\f\t]
 ENTER   = [\ \n]
 
 %%
-<YYINITIAL> {PAR_IZQ}       { return new Symbol(sym.PAR_IZQ, yyline, yycolumn, yytext()); }
-<YYINITIAL> {PAR_DER}       { return new Symbol(sym.PAR_DER, yyline, yycolumn, yytext()); }
+
 <YYINITIAL> {ID}            { return new Symbol(sym.ID, yyline, yycolumn, yytext()); }
 <YYINITIAL> {ENTERO}        { return new Symbol(sym.ENTERO, yyline, yycolumn, yytext()); }
 <YYINITIAL> {DECIMAL}       { return new Symbol(sym.DECIMAL, yyline, yycolumn, yytext()); }
 <YYINITIAL> {MAS}           { return new Symbol(sym.MAS, yyline, yycolumn, null); }
-<YYINITIAL> {MENOS}	    	{ return new Symbol(sym.MENOS, yyline, yycolumn, null); }
+<YYINITIAL> {MENOS}	    { return new Symbol(sym.MENOS, yyline, yycolumn, null); }
 <YYINITIAL> {MULT}          { return new Symbol(sym.MULT, yyline, yycolumn, null); }
-<YYINITIAL> {DIV}	    	{ return new Symbol(sym.DIV, yyline, yycolumn, null); }
-<YYINITIAL> {POT}	    	{ return new Symbol(sym.POT, yyline, yycolumn, null); }
-
-<YYINITIAL> {MAYORQ}	    { return new Symbol(sym.MAYORQUE, yyline, yycolumn, null); }
-<YYINITIAL> {MENORQ}        { return new Symbol(sym.MENORQUE, yyline, yycolumn, null); }
-<YYINITIAL> {MAYORI}	    { return new Symbol(sym.MAYORIGUAL, yyline, yycolumn, null); }
-<YYINITIAL> {MENORI}	    { return new Symbol(sym.MENORIGUAL, yyline, yycolumn, null); }
-<YYINITIAL> {IGUALQ}	    { return new Symbol(sym.IGUAL, yyline, yycolumn, null); }
-<YYINITIAL> {DIFERE}	    { return new Symbol(sym.DIFERENTE, yyline, yycolumn, null); }
-
-<YYINITIAL> {ANDLOG}	    	{ return new Symbol(sym.AND, yyline, yycolumn, null); }
-<YYINITIAL> {ORLOG}          { return new Symbol(sym.OR, yyline, yycolumn, null); }
-<YYINITIAL> {NOTLOG}	    	{ return new Symbol(sym.NOT, yyline, yycolumn, null); }
+<YYINITIAL> {DIV}	    { return new Symbol(sym.DIV, yyline, yycolumn, null); }
+<YYINITIAL> {POT}	    { return new Symbol(sym.POT, yyline, yycolumn, null); }
+<YYINITIAL> {PAR_IZQ}	    { return new Symbol(sym.PAR_IZQ, yyline, yycolumn, null); }
+<YYINITIAL> {PAR_DER}	    { return new Symbol(sym.PAR_DER, yyline, yycolumn, null); }
+<YYINITIAL> {MAYOR}	    { return new Symbol(sym.MAYOR, yyline, yycolumn, yytext()); }
+<YYINITIAL> {MENOR}	    { return new Symbol(sym.MENOR, yyline, yycolumn, yytext()); }
+<YYINITIAL> {MAYORIGUAL}	    { return new Symbol(sym.MAYORIGUAL, yyline, yycolumn, yytext()); }
+<YYINITIAL> {MENORIGUAL}	    { return new Symbol(sym.MENORIGUAL, yyline, yycolumn, yytext()); }
+<YYINITIAL> {IGUALIGUAL}	    { return new Symbol(sym.IGUALIGUAL, yyline, yycolumn, yytext()); }
+<YYINITIAL> {DIFERENTE}	    { return new Symbol(sym.DIFERENTE, yyline, yycolumn, yytext()); }
+<YYINITIAL> {AND}	    { return new Symbol(sym.AND, yyline, yycolumn, yytext()); }
+<YYINITIAL> {OR}	    { return new Symbol(sym.OR, yyline, yycolumn, yytext()); }
+<YYINITIAL> {NOT}	    { return new Symbol(sym.NOT, yyline, yycolumn, yytext()); }
 
 <YYINITIAL> {SPACE}     { /*Espacios en blanco, ignorados*/ }
 <YYINITIAL> {ENTER}     { /*Saltos de linea, ignorados*/}

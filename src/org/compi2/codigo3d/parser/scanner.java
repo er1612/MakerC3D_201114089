@@ -652,23 +652,23 @@ public class scanner implements java_cup.runtime.Scanner {
             }
           case 28: break;
           case 7: 
-            { return new Symbol(sym.PAR_IZQ, yyline, yycolumn, yytext());
+            { return new Symbol(sym.PAR_IZQ, yyline, yycolumn, null);
             }
           case 29: break;
           case 8: 
-            { return new Symbol(sym.PAR_DER, yyline, yycolumn, yytext());
+            { return new Symbol(sym.PAR_DER, yyline, yycolumn, null);
             }
           case 30: break;
           case 9: 
-            { return new Symbol(sym.MAYORQUE, yyline, yycolumn, null);
+            { return new Symbol(sym.MAYOR, yyline, yycolumn, yytext());
             }
           case 31: break;
           case 10: 
-            { return new Symbol(sym.MENORQUE, yyline, yycolumn, null);
+            { return new Symbol(sym.MENOR, yyline, yycolumn, yytext());
             }
           case 32: break;
           case 11: 
-            { return new Symbol(sym.NOT, yyline, yycolumn, null);
+            { return new Symbol(sym.NOT, yyline, yycolumn, yytext());
             }
           case 33: break;
           case 12: 
@@ -688,27 +688,27 @@ public class scanner implements java_cup.runtime.Scanner {
             }
           case 37: break;
           case 16: 
-            { return new Symbol(sym.MAYORIGUAL, yyline, yycolumn, null);
+            { return new Symbol(sym.MAYORIGUAL, yyline, yycolumn, yytext());
             }
           case 38: break;
           case 17: 
-            { return new Symbol(sym.MENORIGUAL, yyline, yycolumn, null);
+            { return new Symbol(sym.MENORIGUAL, yyline, yycolumn, yytext());
             }
           case 39: break;
           case 18: 
-            { return new Symbol(sym.IGUAL, yyline, yycolumn, null);
+            { return new Symbol(sym.IGUALIGUAL, yyline, yycolumn, yytext());
             }
           case 40: break;
           case 19: 
-            { return new Symbol(sym.DIFERENTE, yyline, yycolumn, null);
+            { return new Symbol(sym.DIFERENTE, yyline, yycolumn, yytext());
             }
           case 41: break;
           case 20: 
-            { return new Symbol(sym.AND, yyline, yycolumn, null);
+            { return new Symbol(sym.AND, yyline, yycolumn, yytext());
             }
           case 42: break;
           case 21: 
-            { return new Symbol(sym.OR, yyline, yycolumn, null);
+            { return new Symbol(sym.OR, yyline, yycolumn, yytext());
             }
           case 43: break;
           case 22: 
