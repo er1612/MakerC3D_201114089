@@ -25,7 +25,7 @@ action code
 terminal String ID, ENTERO, DECIMAL;
 terminal TokenC3D MAS, MENOS, MULT, DIV, POT, PAR_IZQ, PAR_DER;
 terminal String  MAYOR, MENOR, MAYORIGUAL, MENORIGUAL, IGUALIGUAL, DIFERENTE, AND, OR, NOT;
-nonterminal NodoC3D inicial, expresion, explogica, exprel, simrel;
+nonterminal NodoC3D inicial, expresion, explogica, exprel, simrel, valor;
 
 precedence left OR;
 precedence left AND;
@@ -39,30 +39,41 @@ start with inicial;
 
 inicial     ::= {: ControlC3D.reiniciar(); :} explogica:exp 
                     {: 
-                        RESULT = exp;
-                        ControlC3D.agregarC3D("//Último valor: " + exp.getCad());
+						System.out.println(exp.getCad());
+                        if(exp.getCad().equalsIgnoreCase("")==false)
+                        {
+             	           ControlC3D.agregarC3D("//Ultimo valor: "+exp.getCad());
+                 		}
+                 		else
+                 		{
+                 		 ControlC3D.agregarC3D("//Etiqueta verdadera: " + exp.getVerdadero() +"\n//Etiqueta falsa: "+exp.getFalso());
+                 		}
+                 		RESULT = exp;
                     :};
 					
-explogica		::= explogica:izq AND explogica:der
+explogica		::= explogica:izq AND 
+					{:
+						String c3d=izq.getVerdadero()+":\n";
+						ControlC3D.agregarC3D(c3d);
+					:}
+					explogica:der
 					{: 
-                        String temp = ControlC3D.generaTemp();
-                        String c3d = temp + " = " + izq.getCad() + " && " + der.getCad() + ";\n";
-                        ControlC3D.agregarC3D(c3d);
-                        RESULT = new NodoC3D(temp); 
+                        RESULT = new NodoC3D("",der.getVerdadero(),izq.getFalso()+","+der.getFalso());  
                     :}
-				|explogica:izq OR explogica:der
+				|explogica:izq OR 
+					{:
+						String c3d=izq.getFalso()+":\n";
+						ControlC3D.agregarC3D(c3d);
+					:}
+					explogica:der
 					{: 
-                        String temp = ControlC3D.generaTemp();
-                        String c3d = temp + " = " + izq.getCad() + " || " + der.getCad() + ";\n";
-                        ControlC3D.agregarC3D(c3d);
-                        RESULT = new NodoC3D(temp); 
+                        RESULT = new NodoC3D("",izq.getVerdadero() +","+der.getVerdadero(),der.getFalso()); 
                     :}
-				|NOT explogica:der
+				|NOT PAR_IZQ explogica:exp PAR_DER
 					{: 
-                        String temp = ControlC3D.generaTemp();
-                        String c3d = temp + " = " + " ! " + der.getCad() + ";\n";
-                        ControlC3D.agregarC3D(c3d);
-                        RESULT = new NodoC3D(temp); 
+                        String v=exp.getFalso();
+                        String f=exp.getVerdadero();
+                        RESULT = new NodoC3D("",v,f); 
                     :}
 				|exprel:exp
 						{: RESULT = exp; :}
@@ -70,10 +81,12 @@ explogica		::= explogica:izq AND explogica:der
 					
 exprel		::= expresion:izq simrel:s expresion:der
 					{: 
-                        String temp = ControlC3D.generaTemp();
-                        String c3d = temp + " = " + izq.getCad() + " " + s.getCad() + " " + der.getCad() + ";\n";
+                        String v=ControlC3D.generaEtq();
+                        String f=ControlC3D.generaEtq();
+                        String c3d = "if " + izq.getCad() + " " + s.getCad() + " " + der.getCad() + " then goto "+v+"\n";
+                        c3d+="goto "+f+"\n";
                         ControlC3D.agregarC3D(c3d);
-                        RESULT = new NodoC3D(temp); 
+                        RESULT = new NodoC3D("",v,f); 
                     :}
 				|expresion:exp
 					{: RESULT = exp; :}
@@ -128,7 +141,13 @@ expresion   ::= expresion:izq MAS expresion:der
                         ControlC3D.agregarC3D(c3d);
                         RESULT = new NodoC3D(temp); 
                     :}
-            |   MENOS expresion:exp 
+			|	valor:exp
+					{:
+						RESULT = exp;
+					:}
+			;
+			
+    valor	::=   MENOS valor:exp 
                     {: 
                         String temp = ControlC3D.generaTemp();
                         String c3d = temp + " = - " + exp.getCad() + ";\n";
